@@ -1,7 +1,7 @@
 ## Minitalk: ~15h of Coding
 
 **Description**:
-Minitalk is a client-server application designed to transmit characters bit by bit using UNIX signals. The project was developed without the use of dynamic memory allocation or global variables.
+Minitalk is a client-server application designed to transmit characters bit by bit using UNIX signals. The project was developed without the use of dynamic memory allocation (except ft_printf for printing unsigned int (bonus client bits counter)) or global variables.
 
 **Functionality**:
 - **Client**:

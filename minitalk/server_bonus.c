@@ -54,7 +54,7 @@ int	main(void)
 	sa.sa_sigaction = &bit_handler;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
-	ft_printf("Server PID: %d\n", getpid());
+	ft_printf("Server PID: %u\n", getpid());
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)

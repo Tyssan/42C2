@@ -43,7 +43,7 @@ void	bit_handler(int signum)
 
 int	main(void)
 {
-	ft_printf("Server PID: %d\n", getpid());
+	ft_printf("Server PID: %u\n", getpid());
 	signal(SIGUSR1, bit_handler);
 	signal(SIGUSR2, bit_handler);
 	while (1)

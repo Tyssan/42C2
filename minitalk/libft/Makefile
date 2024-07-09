@@ -26,8 +26,7 @@ OBJ_PATH	= obj/
 ## SOURCES
 
 SRC_FILES	=	ft_atoi.c ft_isdigit.c ft_itoa.c ft_putchar_fd.c ft_strdup.c ft_strlen.c \
-				ft_printf.c ft_printf_utils.c \
-				ft_print_hex.c ft_print_unsigned.c ft_print_ptr.c
+				ft_printf.c ft_print_unsigned.c
 
 SRCS		=	$(addprefix $(SRC_PATH)/, $(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH)/, $(SRC_FILES:.c=.o))

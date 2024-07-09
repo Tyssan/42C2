@@ -23,27 +23,14 @@
 /*ft_printf.c*/
 int				ft_printf(const char *format, ...);
 int				ft_formats(va_list args, const char format);
-int				ft_print_char(int c);
-int				unsigned_de_merde(long num);
-
-/*ft_printf_utils.c*/
-int				ft_print_nbr(int nbr);
 int				ft_print_str(char *str);
-
-/*ft_print_hex.c*/
-int				ft_print_hex(unsigned int hexvalue, const char format);
-void			ft_write_hex(unsigned int hexvalue, const char format);
-unsigned int	ft_count_hex(unsigned int hexvalue);
+int				unsigned_de_merde(long num);
+int				ft_print_char(int c);
 
 /*ft_print_unsigned.c*/
 int				ft_print_unsigned(unsigned int n);
 char			*ft_uitoa(unsigned int n);
 int				ft_unumlen(unsigned int n);
-
-/*ft_print_ptr.c*/
-int				ft_print_ptr(unsigned long long ptr);
-void			ft_write_ptr(uintptr_t hexvalue);
-unsigned int	ft_count_ptr(uintptr_t hexvalue);
 
 /*libft*/
 int				ft_atoi(const char *nptr);

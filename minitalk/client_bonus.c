@@ -58,7 +58,7 @@ void	send_bit(int pid, unsigned char current_char)
 
 void	handle_read_signal(int signum)
 {
-	static int	nb;
+	static unsigned int	nb;
 
 	if (signum == SIGUSR1)
 		nb++;
