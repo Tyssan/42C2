@@ -29,15 +29,15 @@ BONUS_OBJECTS = $(BONUS_SOURCES:%.c=$(OBJDIR)/%.o)
 ################################################################################
 ## RULES
 
-all: objdir server client bonus
+all: bonus server client 
 
-server: $(OBJDIR)/server.o libft
+server: $(OBJDIR)/server.o
 	$(CC) -o $@ $< -Llibft -lft
 
-client: $(OBJDIR)/client.o libft
+client: $(OBJDIR)/client.o
 	$(CC) -o $@ $< -Llibft -lft
 
-bonus: server_bonus client_bonus
+bonus: objdir libft server_bonus client_bonus
 
 server_bonus: $(BONUS_OBJECTS)
 	$(CC) -o $@ $(OBJDIR)/server_bonus.o -Llibft -lft
