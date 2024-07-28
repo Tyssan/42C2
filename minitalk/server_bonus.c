@@ -23,11 +23,6 @@ void	bit_handler(int signum, siginfo_t *info, void *context)
 		bit = 0;
 	else if (signum == SIGUSR1)
 		bit = 1;
-	else
-	{
-		ft_printf("SIGNAL ERROR");
-		return ;
-	}
 	current_char = (current_char << 1) + bit;
 	bits_done++;
 	if (bits_done == 8)
@@ -44,7 +39,6 @@ void	bit_handler(int signum, siginfo_t *info, void *context)
 	}
 	if (signum == SIGUSR1 || signum == SIGUSR2)
 		kill(info->si_pid, SIGUSR1);
-	return ;
 }
 
 int	main(void)

@@ -6,12 +6,12 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 00:49:23 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/07/09 00:49:23 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:49:17 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 # include <stdarg.h>
 # include <unistd.h>
