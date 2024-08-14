@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbrunier <tbrunier@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 05:25:10 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/07/23 05:25:10 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/08/14 05:28:49 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/08/14 05:28:49 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 #include "./libft/include/libft.h"
 
-int	msg(char *error_code)
+void	first_child(pipex, argv, envp)
 {
-	write(2, error_code, ft_strlen(error_code));
-	return (1);
+	
+	return ;
 }
-
-void	msg_error(char *error_code)
+void	second_child(pipex, argv, envp)
 {
-	perror(error_code);
-	exit(1);
+
+	return ;
 }

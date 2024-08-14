@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 05:25:10 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/07/23 05:25:10 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/08/02 07:55:23 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/08/02 07:55:23 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
-#include "./libft/include/libft.h"
-
-int	msg(char *error_code)
+int	ft_atoi(const char *str)
 {
-	write(2, error_code, ft_strlen(error_code));
-	return (1);
-}
+	int	i;
+	int	nb;
+	int	parity;
 
-void	msg_error(char *error_code)
-{
-	perror(error_code);
-	exit(1);
+	i = 0;
+	nb = 0;
+	parity = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			parity = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + (str[i] - 48);
+		i++;
+	}
+	return (nb * parity);
 }
