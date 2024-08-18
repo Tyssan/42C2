@@ -1,6 +1,10 @@
 # 42C2
 Cursus 42 Circle 2
 -
-Minitalk: to be evaluated
+Minitalk: 123/100 MANDATORY:OK BONUS:OK
 
-pushswap: WIP
+pipex: WIP
+
+fract-ol: TODO
+
+pushswap: TODO
