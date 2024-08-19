@@ -54,7 +54,8 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f *.txt
+	rm -f outfile
+	rm -f infile
 	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
