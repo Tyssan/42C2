@@ -19,7 +19,7 @@
 # include <unistd.h>
 /*malloc, free, exit*/
 # include <stdlib.h>
-/*open, unlink*/
+/*open, unlink, exit, EXIT_FAILURE macro, EXIT_SUCCES macro*/
 # include <fcntl.h>
 /*waitpid, wait*/
 # include <sys/wait.h>
@@ -39,17 +39,28 @@ typedef struct s_pipex
 	int		outfile;/*outfile.txt FD*/
 	char	*paths;/*contains whats after enmv PATH=*/
 	char	**cmd_paths;/*lists of strings of commands paths*/
-	char	**cmd_args;/*todo*/
-	char	*cmd;/*todo*/
+	char	**cmd_args;/*command parameters*/
+	char	*cmd;/*final command to use in execve*/
 }	t_pipex;
 
+# define INFILE_ERROR "Infile"
+# define OUTFILE_ERROR "Outfile"
+# define INPUT_ERROR "Invalid number of arguments.\n"
+# define PIPE_ERROR "Pipe"
+# define CMD_ERROR "Command not found\n"
+
 /*errors.c*/
-int		msg(char *error_code);
-void	msg_error(char *error_code);
+int		msg(char *code);
+void	msg_error(char *code);
+
+/*free.c*/
+void	child_free(t_pipex *pipex);
+void	parent_free(t_pipex *pipex);
 
 /*childs.c*/
-void	first_child(pipex, argv, envp);
-void	second_child(pipex, argv, envp);
+char	*get_cmd(char **paths, char *cmd);
+void	first_child(t_pipex pipex, char **argv, char **envp);
+void	second_child(t_pipex pipex, char **argv, char **envp);
 
 /*pipex.c*/
 char	*find_path(char **envp);

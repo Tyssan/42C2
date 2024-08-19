@@ -18,15 +18,14 @@ NAME		= libft.a
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-INC_PATH	= .
+INC_PATH	= include/
 SRC_PATH	= .
 OBJ_PATH	= obj/
 
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	ft_atoi.c ft_isdigit.c ft_itoa.c ft_putchar_fd.c ft_strdup.c ft_strlen.c \
-				ft_printf.c ft_print_unsigned.c
+SRC_FILES	=	ft_split.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strncmp.c
 
 SRCS		=	$(addprefix $(SRC_PATH)/, $(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH)/, $(SRC_FILES:.c=.o))

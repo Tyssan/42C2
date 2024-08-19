@@ -25,6 +25,13 @@ char	*find_path(char **envp)
 	return (envp[i] + 5);
 }
 
+void	close_pipes(t_pipex *pipex)
+{
+	close(pipex->tube[0]);
+	close(pipex->tube[1]);
+	return ;
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
@@ -41,25 +48,25 @@ int	main(int ac, char **av, char **envp)
 	pipex.outfile = open(av[ac - 1], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 	if (pipex.outfile < 0)
 	{
-		msg_error(ERR_OUTFILE);
+		msg_error(OUTFILE_ERROR);
 	}
 	if (pipe(pipex.tube) < 0)
 	{
-		msg_error(ERR_PIPE);
+		msg_error(PIPE_ERROR);
 	}
 	pipex.paths = find_path(envp);
 	pipex.cmd_paths = ft_split(pipex.paths, ':');
 	pipex.pid1 = fork();
 	if (pipex.pid1 == 0)
 	{
-		first_child(pipex, argv, envp);
+		first_child(pipex, av, envp);
 	}
 	pipex.pid2 = fork();
-	if (pipex_pid2 == 0)
+	if (pipex.pid2 == 0)
 	{
-		second_child(pipex, argv, envp);
+		second_child(pipex, av, envp);
 	}
-	close_pipes(pipex);
+	close_pipes(&pipex);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
 	parent_free(&pipex);

@@ -13,14 +13,14 @@
 #include "../include/pipex.h"
 #include "./libft/include/libft.h"
 
-int	msg(char *error_code)
+int	msg(char *code)
 {
-	write(2, error_code, ft_strlen(error_code));
+	write(2, code, ft_strlen(code));
 	return (1);
 }
 
-void	msg_error(char *error_code)
+void	msg_error(char *code)
 {
-	perror(error_code);
+	perror(code);
 	exit(1);
 }

@@ -13,7 +13,7 @@
 ################################################################################
 ## VARIABLES
 
-NAME = pipex.a
+NAME = pipex
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
@@ -21,37 +21,41 @@ CFLAGS		= -Wall -Wextra -Werror
 INCLUDE		= include/
 SRC_PATH	= src/
 OBJ_PATH	= obj/
+LIBFT_PATH	= src/libft
+LIBFT_LIB	= $(LIBFT_PATH)/libft.a
 
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	
+SRC_FILES	=	childs.c errors.c free.c pipex.c
 SRCS		=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))
 
 ################################################################################
 ## RULES
 
-all : $(NAME) libft
+all: libft $(NAME)
 
-$(NAME) : $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_PATH) -lft
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c | $(OBJ_PATH)
-	$(CC) -o $@ -c $< -Llibft -lft $(CFLAGS) -I $(INCLUDE)
-$(OBJ_PATH) :
+	$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
+
+$(OBJ_PATH):
 	mkdir -p $(OBJ_PATH)
 
 libft:
-	make -C ./src/libft
+	make -C $(LIBFT_PATH)
 
 clean:
 	rm -rf $(OBJ_PATH)
-	make -C ./src/libft clean
-	
+	make -C $(LIBFT_PATH) clean
+
 fclean: clean
 	rm -f $(NAME)
-	rm -f ./src/libft/libft.a
+	rm -f *.txt
+	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
 
