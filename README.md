@@ -3,8 +3,8 @@ Cursus 42 Circle 2
 -
 Minitalk: 123/100 MANDATORY:OK BONUS:OK
 
-pipex: WIP
+pipex: 100/100 MANDATORY: OK BONUS: NULL
 
-fract-ol: TODO
+fract-ol: WIP
 
 pushswap: TODO
