@@ -1,1 +1,4 @@
+/fractol/.ignore/
 /fractol/minilibx-linux/
+/fractol/src/libft/obj/
+/fractol/src/libft/libft.a
