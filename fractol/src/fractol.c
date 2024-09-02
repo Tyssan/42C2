@@ -73,22 +73,22 @@ void	ft_draw(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, img.img);
 }
 
-int	update_position(t_data *data, t_keys *keys)
+int	update_position(t_data *data)
 {
-	if (keys->left && data->pixels->x > 0)
+	if (data->keys_state->left && data->pixels->x > 0)
 		data->pixels->x -= 1;
-	if (keys->right && data->pixels->x < WIN_W - 1)
+	if (data->keys_state->right && data->pixels->x < WIN_W - 1)
 		data->pixels->x += 1;
-	if (keys->up && data->pixels->y > 0)
+	if (data->keys_state->up && data->pixels->y > 0)
 		data->pixels->y -= 1;
-	if (keys->down && data->pixels->y < WIN_H - 1)
+	if (data->keys_state->down && data->pixels->y < WIN_H - 1)
 		data->pixels->y += 1;
 	add_pixel(&data->pixels, data->pixels->x, data->pixels->y, data->pixels->color);
 	ft_draw(data);
 	return (0);
 }
 
-int	key_press(int key, t_keys *keys)
+int	key_press(int key, t_keystate *keys)
 {
 	if (key == XK_Left)
 		keys->left = 1;
@@ -101,7 +101,7 @@ int	key_press(int key, t_keys *keys)
 	return (0);
 }
 
-int	key_release(int key, t_keys *keys)
+int	key_release(int key, t_keystate *keys)
 {
 	if (key == XK_Left)
 		keys->left = 0;
@@ -158,13 +158,13 @@ void	ft_stop_and_clean(t_data *data, int key)
 
 int	loop_hook(int key, t_data *data)
 {
-	update_position(data, data->keys_state);
-	ft_stop_and_clean(data , key);
-	keys_handler(data , key);
+	update_position(data);
+	ft_stop_and_clean(data, key);
+	keys_handler(data, key);
 	return (0);
 }
 
-void init_keys(t_keys *keys)
+void init_keys(t_keystate *keys)
 {
 	keys->left = 0;
 	keys->right = 0;
@@ -178,7 +178,7 @@ int	main(void)
 
 	data.mlx_ptr = mlx_init();
 	data.mlx_win_ptr = mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, "tbrunier's fract-ol");
-	init_keys(&data.keys_state);
+	init_keys(data.keys_state);
 	data.pixels = new_pixel(WIN_W / 2, WIN_H / 2, 0x00FF0000);
 	mlx_hook(data.mlx_win_ptr, KeyPress, KeyPressMask, key_press, &data.keys_state);
 	mlx_hook(data.mlx_win_ptr, KeyRelease, KeyReleaseMask, key_release, &data.keys_state);

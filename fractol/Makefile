@@ -16,7 +16,7 @@
 NAME = fractol
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra #-Werror#
+CFLAGS		= -Wall -Wextra -Werror
 
 LIBX_PATH	= ./minilibx-linux/
 LIBX_NAME	= libmlx.a
