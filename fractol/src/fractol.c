@@ -75,42 +75,28 @@ void	ft_draw(t_data *data)
 
 int	update_position(t_data *data)
 {
-	if (data->keys_state->left && data->pixels->x > 0)
-		data->pixels->x -= 1;
-	if (data->keys_state->right && data->pixels->x < WIN_W - 1)
-		data->pixels->x += 1;
-	if (data->keys_state->up && data->pixels->y > 0)
-		data->pixels->y -= 1;
-	if (data->keys_state->down && data->pixels->y < WIN_H - 1)
-		data->pixels->y += 1;
+	if (data->keys_state->left && !data->keys_state->right)
+	{
+		if (data->pixels->x > 0)
+			data->pixels->x -= 1;
+	}
+	if (data->keys_state->right && !data->keys_state->left)
+	{
+		if (data->pixels->x < WIN_W - 1)
+			data->pixels->x += 1;
+	}
+	if (data->keys_state->up && !data->keys_state->down)
+	{
+		if (data->pixels->y > 0)
+			data->pixels->y -= 1;
+	}
+	if (data->keys_state->down && !data->keys_state->up)
+	{
+	if (data->pixels->y < WIN_H - 1)
+			data->pixels->y += 1;
+	}
 	add_pixel(&data->pixels, data->pixels->x, data->pixels->y, data->pixels->color);
 	ft_draw(data);
-	return (0);
-}
-
-int	key_press(int key, t_keystate *keys)
-{
-	if (key == XK_Left)
-		keys->left = 1;
-	if (key == XK_Right)
-		keys->right = 1;
-	if (key == XK_Up)
-		keys->up = 1;
-	if (key == XK_Down)
-		keys->down = 1;
-	return (0);
-}
-
-int	key_release(int key, t_keystate *keys)
-{
-	if (key == XK_Left)
-		keys->left = 0;
-	if (key == XK_Right)
-		keys->right = 0;
-	if (key == XK_Up)
-		keys->up = 0;
-	if (key == XK_Down)
-		keys->down = 0;
 	return (0);
 }
 
@@ -130,9 +116,10 @@ void	erase_program(t_data *data)
 {
 	free_pixels(data->pixels);
 	data->pixels = NULL;
+	data->pixels = new_pixel(WIN_W / 2, WIN_H / 2, 0x00FF0000);
 }
 
-void	keys_handler(t_data *data, int key)
+void	keys_handler(int key, t_data *data)
 {
 	if (key == XK_r)
 	{
@@ -141,35 +128,48 @@ void	keys_handler(t_data *data, int key)
 	}
 	if (key == XK_e)
 		erase_program(data);
-}
-
-void	ft_stop_and_clean(t_data *data, int key)
-{
 	if (key == XK_Escape)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win_ptr);
 		mlx_destroy_display(data->mlx_ptr);
 		free_pixels(data->pixels);
 		free(data->mlx_ptr);
+		free(data->keys_state);
 		exit(0);
 	}
-	return ;
 }
 
-int	loop_hook(int key, t_data *data)
+int	key_press(int key, t_data *data)
 {
-	update_position(data);
-	ft_stop_and_clean(data, key);
-	keys_handler(data, key);
+	if (!data || !data->keys_state)
+		return (0);
+	if (key == XK_Left)
+		data->keys_state->left = 1;
+	if (key == XK_Right)
+		data->keys_state->right = 1;
+	if (key == XK_Up)
+		data->keys_state->up = 1;
+	if (key == XK_Down)
+		data->keys_state->down = 1;
+	keys_handler(key, data);
+	printf("Pre - Left: %d, Right: %d, Up: %d, Down: %d\n", data->keys_state->left, data->keys_state->right, data->keys_state->up, data->keys_state->down);
 	return (0);
 }
 
-void init_keys(t_keystate *keys)
+int	key_release(int key, t_data *data)
 {
-	keys->left = 0;
-	keys->right = 0;
-	keys->up = 0;
-	keys->down = 0;
+	if (!data || !data->keys_state)
+		return (0);
+	if (key == XK_Left)
+		data->keys_state->left = 0;
+	if (key == XK_Right)
+		data->keys_state->right = 0;
+	if (key == XK_Up)
+		data->keys_state->up = 0;
+	if (key == XK_Down)
+		data->keys_state->down = 0;
+	printf("Rel - Left: %d, Right: %d, Up: %d, Down: %d\n", data->keys_state->left, data->keys_state->right, data->keys_state->up, data->keys_state->down);
+	return (0);
 }
 
 int	main(void)
@@ -178,12 +178,17 @@ int	main(void)
 
 	data.mlx_ptr = mlx_init();
 	data.mlx_win_ptr = mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, "tbrunier's fract-ol");
-	init_keys(data.keys_state);
+	data.keys_state = malloc(sizeof(t_keystate));
+	if (!data.keys_state)
+		return (1);
+	data.keys_state->left = 0;
+	data.keys_state->right = 0;
+	data.keys_state->up = 0;
+	data.keys_state->down = 0;
 	data.pixels = new_pixel(WIN_W / 2, WIN_H / 2, 0x00FF0000);
-	mlx_hook(data.mlx_win_ptr, KeyPress, KeyPressMask, key_press, &data.keys_state);
-	mlx_hook(data.mlx_win_ptr, KeyRelease, KeyReleaseMask, key_release, &data.keys_state);
-	mlx_key_hook(data.mlx_win_ptr, loop_hook, &data);
+	mlx_hook(data.mlx_win_ptr, KeyPress, KeyPressMask, key_press, &data);
+	mlx_hook(data.mlx_win_ptr, KeyRelease, KeyReleaseMask, key_release, &data);
+	mlx_loop_hook(data.mlx_ptr, update_position, &data);
 	mlx_loop(data.mlx_ptr);
-	free_pixels(data.pixels);
 	return (0);
 }

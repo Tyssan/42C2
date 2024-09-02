@@ -32,8 +32,8 @@
 # include <X11/Xlib.h>
 /*keys input*/
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 800
+# define WIN_H 600
 
 typedef struct s_keystate
 {
