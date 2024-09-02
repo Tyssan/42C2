@@ -28,22 +28,42 @@
 # include <math.h>
 /*maths functions*/
 # include <X11/keysym.h>
+# include <X11/X.h>
+# include <X11/Xlib.h>
 /*keys input*/
 
 # define WIN_W 1280
 # define WIN_H 720
 
+typedef struct s_keystate
+{
+	int				left;
+	int				right;
+	int				up;
+	int				down;
+}				t_keystate;
+
+typedef struct s_pixel
+{
+	unsigned int	x;
+	unsigned int	y;
+	int				color;
+	struct s_pixel	*next;
+}				t_pixel;
+
 typedef struct	s_data {
-	void	*mlx_ptr;
-	void	*mlx_win_ptr;
+	void			*mlx_ptr;
+	void			*mlx_win_ptr;
+	t_pixel			*pixels;
+	t_keystate		*keys_state;
 }				t_data;
 
 typedef struct	s_image {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
 }				t_image;
 
 #endif
