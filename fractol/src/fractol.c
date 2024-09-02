@@ -28,11 +28,66 @@ t_pixel	*new_pixel(unsigned int x, unsigned int y, int color)
 	return (new);
 }
 
-void	add_pixel(t_pixel **pixels, unsigned int x, unsigned int y, int color)
+int	rainbow_color(int position)
+{
+	int r, g, b;
+	int period = 360;
+	int hue = position % period;
+	int sector = hue / 60;
+	int fraction = (hue % 60) * 255 / 60;
+	int p = 0;
+	int q = 255 - fraction;
+	int t = fraction;
+		
+	if (sector == 0)
+	{
+		r = 255;
+		g = t;
+		b = p;
+	}
+	else if (sector == 1)
+	{
+		r = q;
+		g = 255;
+		b = p;
+	}
+	else if (sector == 2)
+	{
+		r = p;
+		g = 255;
+		b = t;
+	}
+	else if (sector == 3)
+	{
+		r = p;
+		g = q;
+		b = 255;
+	}
+	else if (sector == 4)
+	{
+		r = t;
+		g = p;
+		b = 255;
+	}
+	else if (sector == 5)
+	{
+		r = 255;
+		g = p;
+		b = q;
+	}
+	return (r << 16) | (g << 8) | b;
+}
+
+void	add_pixel(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y)
 {
 	t_pixel	*new;
 	t_pixel	*current;
+	int		color;
 
+	if (data->rainbow_mode)
+		color = rainbow_color(x + y);
+	else
+		color = 0x00FF0000;
 	new = new_pixel(x, y, color);
 	if (!new)
 		return ;
@@ -95,7 +150,7 @@ int	update_position(t_data *data)
 	if (data->pixels->y < WIN_H - 1)
 			data->pixels->y += 1;
 	}
-	add_pixel(&data->pixels, data->pixels->x, data->pixels->y, data->pixels->color);
+	add_pixel(data, &data->pixels, data->pixels->x, data->pixels->y);
 	ft_draw(data);
 	return (0);
 }
@@ -112,11 +167,11 @@ void	free_pixels(t_pixel *pixels)
 	}
 }
 
-void	erase_program(t_data *data)
+void	erase_program(t_data *data, unsigned int x, unsigned int y)
 {
 	free_pixels(data->pixels);
 	data->pixels = NULL;
-	data->pixels = new_pixel(WIN_W / 2, WIN_H / 2, 0x00FF0000);
+	data->pixels = new_pixel(x, y, 0x00FF0000);
 }
 
 void	keys_handler(int key, t_data *data)
@@ -127,7 +182,9 @@ void	keys_handler(int key, t_data *data)
 		data->pixels->y = WIN_H / 2;
 	}
 	if (key == XK_e)
-		erase_program(data);
+		erase_program(data, data->pixels->x,data->pixels->y);
+	if (key == XK_t)
+		data->rainbow_mode = !data->rainbow_mode;
 	if (key == XK_Escape)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win_ptr);

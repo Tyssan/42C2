@@ -56,6 +56,7 @@ typedef struct	s_data {
 	void			*mlx_win_ptr;
 	t_pixel			*pixels;
 	t_keystate		*keys_state;
+	int				rainbow_mode;
 }				t_data;
 
 typedef struct	s_image {
