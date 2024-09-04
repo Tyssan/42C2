@@ -16,7 +16,7 @@
 NAME = fractol
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror #-g -O0#valgrind_debug_flags
 
 LIBX_PATH	= ./minilibx-linux/
 LIBX_NAME	= libmlx.a
@@ -31,7 +31,7 @@ LIBFT_LIB	= $(LIBFT_PATH)/libft.a
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	fractol.c
+SRC_FILES	=	fractol.c init.c
 LIBSX		=	$(addprefix $(LIBX_PATH),$(LIBX_NAME))
 SRCS		=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))

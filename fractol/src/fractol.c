@@ -174,6 +174,17 @@ void	erase_program(t_data *data, unsigned int x, unsigned int y)
 	data->pixels = new_pixel(x, y, 0x00FF0000);
 }
 
+int	terminate_program(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->mlx_win_ptr);
+	mlx_destroy_display(data->mlx_ptr);
+	free_pixels(data->pixels);
+	free(data->mlx_ptr);
+	free(data->keys_state);
+	exit(0);
+	return (0);
+}
+
 void	keys_handler(int key, t_data *data)
 {
 	if (key == XK_r)
@@ -186,14 +197,8 @@ void	keys_handler(int key, t_data *data)
 	if (key == XK_t)
 		data->rainbow_mode = !data->rainbow_mode;
 	if (key == XK_Escape)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->mlx_win_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free_pixels(data->pixels);
-		free(data->mlx_ptr);
-		free(data->keys_state);
-		exit(0);
-	}
+		terminate_program(data);
+	return ;
 }
 
 int	key_press(int key, t_data *data)
@@ -209,7 +214,6 @@ int	key_press(int key, t_data *data)
 	if (key == XK_Down)
 		data->keys_state->down = 1;
 	keys_handler(key, data);
-	printf("Pre - Left: %d, Right: %d, Up: %d, Down: %d\n", data->keys_state->left, data->keys_state->right, data->keys_state->up, data->keys_state->down);
 	return (0);
 }
 
@@ -225,7 +229,6 @@ int	key_release(int key, t_data *data)
 		data->keys_state->up = 0;
 	if (key == XK_Down)
 		data->keys_state->down = 0;
-	printf("Rel - Left: %d, Right: %d, Up: %d, Down: %d\n", data->keys_state->left, data->keys_state->right, data->keys_state->up, data->keys_state->down);
 	return (0);
 }
 
@@ -233,19 +236,13 @@ int	main(void)
 {
 	t_data	data;
 
-	data.mlx_ptr = mlx_init();
-	data.mlx_win_ptr = mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, "tbrunier's fract-ol");
-	data.keys_state = malloc(sizeof(t_keystate));
-	if (!data.keys_state)
+	if (!ft_data_init(&data))
 		return (1);
-	data.keys_state->left = 0;
-	data.keys_state->right = 0;
-	data.keys_state->up = 0;
-	data.keys_state->down = 0;
-	data.pixels = new_pixel(WIN_W / 2, WIN_H / 2, 0x00FF0000);
 	mlx_hook(data.mlx_win_ptr, KeyPress, KeyPressMask, key_press, &data);
 	mlx_hook(data.mlx_win_ptr, KeyRelease, KeyReleaseMask, key_release, &data);
+	mlx_hook(data.mlx_win_ptr, 17, 0, terminate_program, &data);
 	mlx_loop_hook(data.mlx_ptr, update_position, &data);
 	mlx_loop(data.mlx_ptr);
+	terminate_program(&data);
 	return (0);
 }

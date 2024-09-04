@@ -67,4 +67,26 @@ typedef struct	s_image {
 	int				endian;
 }				t_image;
 
+// prototype declarations
+// fractol.c
+t_pixel	*new_pixel(unsigned int x, unsigned int y, int color);
+int		rainbow_color(int position);
+void	add_pixel(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y);
+void	my_mlx_pixel_put(t_image *img, unsigned int x, unsigned int y, int color);
+void	ft_draw(t_data *data);
+int		update_position(t_data *data);
+void	free_pixels(t_pixel *pixels);
+void	erase_program(t_data *data, unsigned int x, unsigned int y);
+int		terminate_program(t_data *data);
+void	keys_handler(int key, t_data *data);
+int		key_press(int key, t_data *data);
+int		key_release(int key, t_data *data);
+
+// init.c
+int		ft_pixel_init(t_data *data);
+int		ft_keys_state_init(t_data *data);
+int		ft_mlx_init(t_data *data);
+void	ft_null_init(t_data *data);
+int		ft_data_init(t_data *data);
+
 #endif
