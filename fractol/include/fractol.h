@@ -34,6 +34,7 @@
 
 # define WIN_W 800
 # define WIN_H 600
+# define WIN_NAME "tbrunier's fractol"
 
 typedef struct s_keystate
 {
@@ -51,7 +52,7 @@ typedef struct s_pixel
 	struct s_pixel	*next;
 }				t_pixel;
 
-typedef struct	s_data {
+typedef struct s_data {
 	void			*mlx_ptr;
 	void			*mlx_win_ptr;
 	t_pixel			*pixels;
@@ -59,7 +60,7 @@ typedef struct	s_data {
 	int				rainbow_mode;
 }				t_data;
 
-typedef struct	s_image {
+typedef struct s_image {
 	void			*img;
 	char			*addr;
 	int				bpp;
@@ -71,8 +72,8 @@ typedef struct	s_image {
 // fractol.c
 t_pixel	*new_pixel(unsigned int x, unsigned int y, int color);
 int		rainbow_color(int position);
-void	add_pixel(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y);
-void	my_mlx_pixel_put(t_image *img, unsigned int x, unsigned int y, int color);
+void	addpxl(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y);
+void	ft_pixel_put(t_image *img, unsigned int x, unsigned int y, int color);
 void	ft_draw(t_data *data);
 int		update_position(t_data *data);
 void	free_pixels(t_pixel *pixels);

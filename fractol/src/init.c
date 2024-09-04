@@ -50,7 +50,7 @@ int	ft_mlx_init(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (0);
-	data->mlx_win_ptr = mlx_new_window(data->mlx_ptr, WIN_W, WIN_H, "tbrunier's fract-ol");
+	data->mlx_win_ptr = mlx_new_window(data->mlx_ptr, WIN_W, WIN_H, WIN_NAME);
 	if (!data->mlx_win_ptr)
 	{
 		mlx_destroy_display(data->mlx_ptr);

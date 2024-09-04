@@ -30,15 +30,15 @@ t_pixel	*new_pixel(unsigned int x, unsigned int y, int color)
 
 int	rainbow_color(int position)
 {
-	int r, g, b;
-	int period = 360;
-	int hue = position % period;
-	int sector = hue / 60;
-	int fraction = (hue % 60) * 255 / 60;
-	int p = 0;
-	int q = 255 - fraction;
-	int t = fraction;
-		
+	int	r, g, b;
+	int	period = 360;
+	int	hue = position % period;
+	int	sector = hue / 60;
+	int	fraction = (hue % 60) * 255 / 60;
+	int	p = 0;
+	int	q = 255 - fraction;
+	int	t = fraction;
+
 	if (sector == 0)
 	{
 		r = 255;
@@ -75,10 +75,10 @@ int	rainbow_color(int position)
 		g = p;
 		b = q;
 	}
-	return (r << 16) | (g << 8) | b;
+	return ((r << 16) | (g << 8) | b);
 }
 
-void	add_pixel(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y)
+void	addpxl(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y)
 {
 	t_pixel	*new;
 	t_pixel	*current;
@@ -102,12 +102,12 @@ void	add_pixel(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y)
 	}
 }
 
-void	my_mlx_pixel_put(t_image *img, unsigned int x, unsigned int y, int color)
+void	ft_pixel_put(t_image *img, unsigned int x, unsigned int y, int color)
 {
 	char	*dst;
 
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 	return ;
 }
 
@@ -117,11 +117,12 @@ void	ft_draw(t_data *data)
 	t_pixel	*current;
 
 	img.img = mlx_new_image(data->mlx_ptr, WIN_W, WIN_H);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(
+			img.img, &img.bpp, &img.line_length, &img.endian);
 	current = data->pixels;
 	while (current)
 	{
-		my_mlx_pixel_put(&img, current->x, current->y, current->color);
+		ft_pixel_put(&img, current->x, current->y, current->color);
 		current = current->next;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win_ptr, img.img, 0, 0);
@@ -147,10 +148,10 @@ int	update_position(t_data *data)
 	}
 	if (data->keys_state->down && !data->keys_state->up)
 	{
-	if (data->pixels->y < WIN_H - 1)
+		if (data->pixels->y < WIN_H - 1)
 			data->pixels->y += 1;
 	}
-	add_pixel(data, &data->pixels, data->pixels->x, data->pixels->y);
+	addpxl(data, &data->pixels, data->pixels->x, data->pixels->y);
 	ft_draw(data);
 	return (0);
 }
@@ -193,7 +194,7 @@ void	keys_handler(int key, t_data *data)
 		data->pixels->y = WIN_H / 2;
 	}
 	if (key == XK_e)
-		erase_program(data, data->pixels->x,data->pixels->y);
+		erase_program(data, data->pixels->x, data->pixels->y);
 	if (key == XK_t)
 		data->rainbow_mode = !data->rainbow_mode;
 	if (key == XK_Escape)
