@@ -40,7 +40,8 @@
 # define MANDELBROT 2
 # define TRICORN 3
 
-typedef struct s_image {
+typedef struct s_image
+{
 	void			*img_ptr;
 	char			*img_data_ptr;
 	int				img_bpp;
@@ -55,7 +56,8 @@ typedef struct s_image {
 	int				color_profile;
 }	t_image;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	void			*mlx_ptr;
 	void			*mlx_win_ptr;
 	t_image			*img;
