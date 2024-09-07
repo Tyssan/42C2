@@ -17,13 +17,13 @@
 /*write*/
 # include <stdlib.h>
 /*malloc, free, exit*/
-#include <math.h>
+# include <math.h>
 /*maths functions (fabs, ..)*/
 # include <X11/keysym.h>
 /*keys input*/
-#include "../src/libft/include/libft.h"
+# include "../src/libft/include/libft.h"
 /*libft*/
-#include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 /*mlx*/
 
 # define WIN_W 1069
@@ -53,18 +53,18 @@ typedef struct s_image {
 	float			offset_x;
 	float			offset_y;
 	int				color_profile;
-}				t_image;
+}	t_image;
 
 typedef struct s_data {
 	void			*mlx_ptr;
 	void			*mlx_win_ptr;
 	t_image			*img;
-}				t_data;
+}	t_data;
 
 // prototype declarations
 
 // draw_fractal.c
-int		get_color(int precision, int max_precision, int	cprofile);
+int		get_color(int precision, int max_precision, int cprofile);
 void	draw_fractal(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 

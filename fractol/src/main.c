@@ -49,8 +49,8 @@ int	main(int argc, char **argv)
 	if (!ft_strcmp(argv[1], "julia"))
 	{
 		data.img->fractal_type = JULIA;
-		data.img->c_real = -0.7f + ((float)(ft_atoi(argv[2])) / 100.0f);
-		data.img->c_imag = 0.27015f + ((float)(ft_atoi(argv[3])) / 100.0f);
+		data.img->c_real = ((float)(ft_atoi(argv[2])) / 1000.0f);
+		data.img->c_imag = ((float)(ft_atoi(argv[3])) / 1000.0f);
 	}
 	else if (!ft_strcmp(argv[1], "mandelbrot"))
 		data.img->fractal_type = MANDELBROT;
