@@ -26,8 +26,8 @@
 #include "../minilibx-linux/mlx.h"
 /*mlx*/
 
-# define WIN_W 727
-# define WIN_H 420
+# define WIN_W 1069
+# define WIN_H 727
 # define WIN_NAME "tbrunier's fractol"
 
 # define ZOOM_FACTOR 0.1f

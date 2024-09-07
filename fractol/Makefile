@@ -16,7 +16,7 @@
 NAME = fractol
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g -O0#valgrind_debug_flags
+CFLAGS		= -Wall -Wextra -Werror #-g -O0#valgrind_debug_flags
 
 LIBX_PATH	= ./minilibx-linux/
 LIBX_NAME	= libmlx.a

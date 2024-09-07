@@ -35,7 +35,7 @@ void	check_error(int argc, char **argv)
 	write(2, "LIST OF USAGES :\n", 17);
 	write(2, "\t./fractol julia [INT|C_REAL] [INT|C_IMAG]\n", 43);
 	write(2, "\t./fractol mandelbrot\n", 22);
-	write(2, "\t./fractol tricorn\n", 23);
+	write(2, "\t./fractol tricorn\n", 19);
 	exit(ERROR_BAD_PARAMETER_NUMBER);
 }
 
