@@ -16,6 +16,15 @@ int	keys_hook(int key, t_data *data)
 {
 	if (key == XK_Escape)
 		terminate_program(data);
+	else if (key == XK_Left)
+		data->img->offset_x -= 69.0f / data->img->zoom;
+	else if (key == XK_Right)
+		data->img->offset_x += 69.0f / data->img->zoom;
+	else if (key == XK_Up)
+		data->img->offset_y -= 69.0f / data->img->zoom;
+	else if (key == XK_Down)
+		data->img->offset_y += 69.0f / data->img->zoom;
+	draw_fractal(data);
 	return (0);
 }
 

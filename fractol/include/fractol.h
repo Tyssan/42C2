@@ -47,6 +47,8 @@ typedef struct s_image {
 	float			c_real;
 	float			c_imag;
 	float			zoom;
+	float			offset_x;
+	float			offset_y;
 }				t_image;
 
 typedef struct s_data {

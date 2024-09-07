@@ -17,9 +17,10 @@ int	deep_draw_mandelbrot(int x, int y, t_data *data)
 	float	tab[5];
 	int		i;
 
-	tab[0] = 1.5f * (x - WIN_W / 2)
-		/ (0.5f * WIN_W * data->img->zoom);
-	tab[1] = (y - WIN_H / 2) / (0.5f * WIN_H * data->img->zoom);
+	tab[0] = 1.5f * (((x - WIN_W / 2) + data->img->offset_x)
+			/ (0.5f * WIN_W * data->img->zoom));
+	tab[1] = (((y - WIN_H / 2) + data->img->offset_y)
+			/ (0.5f * WIN_H * data->img->zoom));
 	tab[2] = 0.0f;
 	tab[3] = 0.0f;
 	i = 0;

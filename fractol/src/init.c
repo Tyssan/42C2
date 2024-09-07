@@ -59,6 +59,8 @@ void	ft_struct_init(t_data *data, int part)
 		data->img->c_real = 0.0f;
 		data->img->c_imag = 0.0f;
 		data->img->zoom = 1.0f;
+		data->img->offset_x = 0.0f;
+		data->img->offset_y = 0.0f;
 	}
 	return ;
 }
