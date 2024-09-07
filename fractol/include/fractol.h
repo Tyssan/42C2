@@ -14,80 +14,73 @@
 # define FRACTOL_H
 
 # include <unistd.h>
-/*write, read, close, access, pipe, dup, dup2, execve, fork*/
+/*write*/
 # include <stdlib.h>
 /*malloc, free, exit*/
-# include <fcntl.h>
-/*open, unlink, exit, EXIT_FAILURE macro, EXIT_SUCCES macro*/
-# include <string.h>
-/*strerror*/
-# include <stdio.h>
-/*perror*/
-# include <errno.h>
-/*errno global variable for perror*/
-# include <math.h>
-/*maths functions*/
 # include <X11/keysym.h>
-# include <X11/X.h>
-# include <X11/Xlib.h>
 /*keys input*/
+#include "../src/libft/include/libft.h"
+/*libft*/
+#include "../minilibx-linux/mlx.h"
+/*mlx*/
 
-# define WIN_W 800
-# define WIN_H 600
+# define WIN_W 1000
+# define WIN_H 700
 # define WIN_NAME "tbrunier's fractol"
 
-typedef struct s_keystate
-{
-	int				left;
-	int				right;
-	int				up;
-	int				down;
-}				t_keystate;
+# define ZOOM_FACTOR 0.1f
+# define PRECISION 21
 
-typedef struct s_pixel
-{
-	unsigned int	x;
-	unsigned int	y;
-	int				color;
-	struct s_pixel	*next;
-}				t_pixel;
+# define ERROR_BAD_PARAMETER_NUMBER 1
+# define ERROR_BAD_FRACTAL_TYPE 2
+
+# define JULIA 1
+# define MANDELBROT 2
+
+typedef struct s_image {
+	void			*img_ptr;
+	char			*img_data_ptr;
+	int				img_bpp;
+	int				img_line_length;
+	int				img_endian;
+	int				fractal_type;
+	float			c_real;
+	float			c_imag;
+	float			zoom;
+}				t_image;
 
 typedef struct s_data {
 	void			*mlx_ptr;
 	void			*mlx_win_ptr;
-	t_pixel			*pixels;
-	t_keystate		*keys_state;
-	int				rainbow_mode;
+	t_image			*img;
 }				t_data;
 
-typedef struct s_image {
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line_length;
-	int				endian;
-}				t_image;
-
 // prototype declarations
-// fractol.c
-t_pixel	*new_pixel(unsigned int x, unsigned int y, int color);
-int		rainbow_color(int position);
-void	addpxl(t_data *data, t_pixel **pixels, unsigned int x, unsigned int y);
-void	ft_pixel_put(t_image *img, unsigned int x, unsigned int y, int color);
-void	ft_draw(t_data *data);
-int		update_position(t_data *data);
-void	free_pixels(t_pixel *pixels);
-void	erase_program(t_data *data, unsigned int x, unsigned int y);
-int		terminate_program(t_data *data);
-void	keys_handler(int key, t_data *data);
-int		key_press(int key, t_data *data);
-int		key_release(int key, t_data *data);
+
+// draw_fractal.c
+int		get_color(int precision, int max_precision);
+void	draw_fractal(t_data *data);
+void	put_pixel(t_data *data, int x, int y, int color);
+
+// hooks.c
+int		mouse_hook(int button, int x, int y, t_data *data);
+int		keys_hook(int key, t_data *data);
 
 // init.c
-int		ft_pixel_init(t_data *data);
-int		ft_keys_state_init(t_data *data);
 int		ft_mlx_init(t_data *data);
-void	ft_null_init(t_data *data);
-int		ft_data_init(t_data *data);
+void	ft_struct_init(t_data *data, int part);
+int		ft_init_main(t_data *data);
+
+// julia.c
+int		deep_draw_julia(int x, int y, t_data *data);
+void	draw_julia(t_data *data);
+
+// main.c
+int		terminate_program(t_data *data);
+void	check_error(int argc, char **argv);
+
+// mandelbrot.c
+int		deep_draw_mandelbrot(int x, int y, t_data *data);
+void	draw_mandelbrot(t_data *data);
 
 #endif

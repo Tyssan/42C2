@@ -16,7 +16,7 @@
 NAME = fractol
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror #-g -O0#valgrind_debug_flags
+CFLAGS		= -Wall -Wextra -Werror -g -O0#valgrind_debug_flags
 
 LIBX_PATH	= ./minilibx-linux/
 LIBX_NAME	= libmlx.a
@@ -31,7 +31,7 @@ LIBFT_LIB	= $(LIBFT_PATH)/libft.a
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	fractol.c init.c
+SRC_FILES	=	draw_fractal.c hooks.c init.c julia.c main.c mandelbrot.c
 LIBSX		=	$(addprefix $(LIBX_PATH),$(LIBX_NAME))
 SRCS		=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))
@@ -39,7 +39,7 @@ OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))
 ################################################################################
 ## RULES
 
-all: $(NAME)
+all: libft $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_LIB) $(LIBSX)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_PATH) -lft -L$(LIBX_PATH) $(MLX_SETTING)
@@ -50,6 +50,9 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c | $(OBJ_PATH)
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH)
 
+libft:
+	$(MAKE) -C $(LIBFT_PATH)
+
 clean:
 	rm -rf $(OBJ_PATH)
 
@@ -58,4 +61,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft
