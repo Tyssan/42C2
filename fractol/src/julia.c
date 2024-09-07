@@ -19,8 +19,10 @@ int	deep_draw_julia(int x, int y, t_data *data)
 	float	tmp;
 	int		i;
 
-	zx = 1.5f * (x - WIN_W / 2) / (0.5f * WIN_W * data->img->zoom);
-	zy = (y - WIN_H / 2) / (0.5f * WIN_H * data->img->zoom);
+	zx = 1.5f * ((x + data->img->offset_x - WIN_W / 2)
+			/ (0.5f * WIN_W * data->img->zoom));
+	zy = ((y + data->img->offset_y - WIN_H / 2)
+			/ (0.5f * WIN_H * data->img->zoom));
 	i = 0;
 	while (zx * zx + zy * zy < 4 && i < PRECISION)
 	{

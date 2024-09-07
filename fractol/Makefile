@@ -39,7 +39,7 @@ OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))
 ################################################################################
 ## RULES
 
-all: libft $(NAME)
+all: libft libmlx $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_LIB) $(LIBSX)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_PATH) -lft -L$(LIBX_PATH) $(MLX_SETTING)
@@ -53,12 +53,18 @@ $(OBJ_PATH):
 libft:
 	$(MAKE) -C $(LIBFT_PATH)
 
+libmlx:
+	$(MAKE) -C $(LIBX_PATH)
+
 clean:
 	rm -rf $(OBJ_PATH)
+	$(MAKE) -C $(LIBFT_PATH) clean
+	$(MAKE) -C $(LIBX_PATH) clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re libft libmlx
