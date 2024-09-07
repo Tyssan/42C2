@@ -17,6 +17,8 @@
 /*write*/
 # include <stdlib.h>
 /*malloc, free, exit*/
+#include <math.h>
+/*maths functions (fabs, ..)*/
 # include <X11/keysym.h>
 /*keys input*/
 #include "../src/libft/include/libft.h"
@@ -24,8 +26,8 @@
 #include "../minilibx-linux/mlx.h"
 /*mlx*/
 
-# define WIN_W 1000
-# define WIN_H 700
+# define WIN_W 727
+# define WIN_H 420
 # define WIN_NAME "tbrunier's fractol"
 
 # define ZOOM_FACTOR 0.1f
@@ -36,6 +38,7 @@
 
 # define JULIA 1
 # define MANDELBROT 2
+# define TRICORN 3
 
 typedef struct s_image {
 	void			*img_ptr;
@@ -49,6 +52,7 @@ typedef struct s_image {
 	float			zoom;
 	float			offset_x;
 	float			offset_y;
+	int				color_profile;
 }				t_image;
 
 typedef struct s_data {
@@ -60,7 +64,7 @@ typedef struct s_data {
 // prototype declarations
 
 // draw_fractal.c
-int		get_color(int precision, int max_precision);
+int		get_color(int precision, int max_precision, int	cprofile);
 void	draw_fractal(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 
@@ -84,5 +88,9 @@ void	check_error(int argc, char **argv);
 // mandelbrot.c
 int		deep_draw_mandelbrot(int x, int y, t_data *data);
 void	draw_mandelbrot(t_data *data);
+
+// tricorn.c
+int		deep_draw_tricorn(int x, int y, t_data *data);
+void	draw_tricorn(t_data *data);
 
 #endif

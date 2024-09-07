@@ -61,6 +61,7 @@ void	ft_struct_init(t_data *data, int part)
 		data->img->zoom = 1.0f;
 		data->img->offset_x = 0.0f;
 		data->img->offset_y = 0.0f;
+		data->img->color_profile = 1;
 	}
 	return ;
 }

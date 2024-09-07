@@ -12,7 +12,7 @@
 
 #include "../include/fractol.h"
 
-int	get_color(int precision, int max_precision)
+int	get_color(int precision, int max_precision, int cprofile)
 {
 	int	ratio;
 	int	r;
@@ -26,7 +26,9 @@ int	get_color(int precision, int max_precision)
 	{
 		r = 255;
 		g = 2 * ratio;
-		b = 0;
+		b = 200;
+		if (cprofile == 2)
+			b = 0;
 	}
 	else
 	{
@@ -43,6 +45,8 @@ void	draw_fractal(t_data *data)
 		draw_julia(data);
 	else if (data->img->fractal_type == MANDELBROT)
 		draw_mandelbrot(data);
+	else if (data->img->fractal_type == TRICORN)
+		draw_tricorn(data);
 	mlx_put_image_to_window(
 		data->mlx_ptr, data->mlx_win_ptr, data->img->img_ptr, 0, 0);
 	return ;

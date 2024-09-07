@@ -31,7 +31,7 @@ LIBFT_LIB	= $(LIBFT_PATH)/libft.a
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	draw_fractal.c hooks.c init.c julia.c main.c mandelbrot.c
+SRC_FILES	=	draw_fractal.c hooks.c init.c julia.c main.c mandelbrot.c tricorn.c
 LIBSX		=	$(addprefix $(LIBX_PATH),$(LIBX_NAME))
 SRCS		=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))

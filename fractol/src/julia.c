@@ -31,7 +31,7 @@ int	deep_draw_julia(int x, int y, t_data *data)
 		zx = tmp;
 		i++;
 	}
-	return (get_color(i, PRECISION));
+	return (get_color(i, PRECISION, data->img->color_profile));
 }
 
 void	draw_julia(t_data *data)
@@ -50,4 +50,5 @@ void	draw_julia(t_data *data)
 		}
 		y++;
 	}
+	return ;
 }

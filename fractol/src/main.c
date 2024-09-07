@@ -26,7 +26,8 @@ int	terminate_program(t_data *data)
 
 void	check_error(int argc, char **argv)
 {
-	if (argc == 2 && !ft_strcmp(argv[1], "mandelbrot"))
+	if (argc == 2 && (!ft_strcmp(argv[1], "mandelbrot")
+			|| !ft_strcmp(argv[1], "tricorn")))
 		return ;
 	if (argc == 4 && !ft_strcmp(argv[1], "julia"))
 		return ;
@@ -34,6 +35,7 @@ void	check_error(int argc, char **argv)
 	write(2, "LIST OF USAGES :\n", 17);
 	write(2, "\t./fractol julia [INT|C_REAL] [INT|C_IMAG]\n", 43);
 	write(2, "\t./fractol mandelbrot\n", 22);
+	write(2, "\t./fractol tricorn\n", 23);
 	exit(ERROR_BAD_PARAMETER_NUMBER);
 }
 
@@ -52,6 +54,8 @@ int	main(int argc, char **argv)
 	}
 	else if (!ft_strcmp(argv[1], "mandelbrot"))
 		data.img->fractal_type = MANDELBROT;
+	else if (!ft_strcmp(argv[1], "tricorn"))
+		data.img->fractal_type = TRICORN;
 	draw_fractal(&data);
 	mlx_key_hook(data.mlx_win_ptr, keys_hook, &data);
 	mlx_mouse_hook(data.mlx_win_ptr, mouse_hook, &data);
