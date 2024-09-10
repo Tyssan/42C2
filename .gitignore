@@ -1,7 +1,10 @@
 /fractol/.ignore/
 /fractol/minilibx-linux/
+/fractol/src/obj/
 /fractol/src/libft/obj/
 /fractol/src/libft/libft.a
+/push_swap/.ignore/
 /push_swap/checker_linux
+/push_swap/src/obj/
+/push_swap/src/libft/obj/
 /push_swap/src/libft/libft.a
-/pushswap/src/libft/obj/
