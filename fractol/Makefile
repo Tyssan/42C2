@@ -6,7 +6,7 @@
 #    By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 15:59:52 by tbrunier          #+#    #+#              #
-#    Updated: 2024/08/21 15:59:52 by tbrunier         ###   ########.fr        #
+#    Updated: 2024/09/18 17:23:11 by tbrunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))
 ################################################################################
 ## RULES
 
-all: $(NAME)#libft libmlx 
+all: libft libmlx $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_LIB) $(LIBSX)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_PATH) -lft -L$(LIBX_PATH) $(MLX_SETTING)
@@ -50,21 +50,21 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c | $(OBJ_PATH)
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH)
 
-#libft:
-#	$(MAKE) -C $(LIBFT_PATH)
+libft:
+	$(MAKE) -C $(LIBFT_PATH)
 
-#libmlx:
-#	$(MAKE) -C $(LIBX_PATH)
+libmlx:
+	$(MAKE) -C $(LIBX_PATH)
 
 clean:
 	rm -rf $(OBJ_PATH)
-#	$(MAKE) -C $(LIBFT_PATH) clean
-#	$(MAKE) -C $(LIBX_PATH) clean
+	$(MAKE) -C $(LIBFT_PATH) clean
+	$(MAKE) -C $(LIBX_PATH) clean
 
 fclean: clean
 	rm -f $(NAME)
-#	make -C $(LIBFT_PATH) fclean
+	make -C $(LIBFT_PATH) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re# libft libmlx
+.PHONY: all clean fclean re libft libmlx
