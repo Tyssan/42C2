@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbrunier <tbrunier@student.42perpignan.    +#+  +:+       +#+         #
+#    By: tbrunier <tbrunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 13:10:24 by tbrunier          #+#    #+#              #
-#    Updated: 2024/07/03 13:10:24 by tbrunier         ###   ########.fr        #
+#    Updated: 2024/09/12 17:30:09 by tbrunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ_PATH	= obj/
 ################################################################################
 ## SOURCES
 
-SRC_FILES	= ft_atoi.c ft_isdigit.c
+SRC_FILES	= ft_atoi.c ft_atoll.c ft_isdigit.c ft_strlen.c
 
 SRCS		= $(addprefix $(SRC_PATH)/, $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_PATH)/, $(SRC_FILES:.c=.o))
