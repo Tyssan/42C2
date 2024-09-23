@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 22:51:22 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 17:16:04 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/09/23 22:34:38 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ bool	ft_firstinit(t_stack **stack, char **argv)
 		value = ft_check_errors(*stack, argv[i]);
 		if (value == LLONG_MAX)
 		{
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
 			return (false);
 		}
 		if (!ft_put_nbr_in_new_node(stack, value))
