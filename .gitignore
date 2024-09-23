@@ -8,3 +8,9 @@
 /push_swap/obj/
 /push_swap/src/libft/obj/
 /push_swap/src/libft/libft.a
+/push_swap/traces.txt
+/push_swap/push_swap_test_linux.sh
+/push_swap/push_swap
+/push_swap/pro_checker
+/push_swap/.ignore
+/push_swap/push_swap_tester
