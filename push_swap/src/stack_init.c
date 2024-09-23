@@ -6,24 +6,24 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 22:51:22 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 03:19:14 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:16:04 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ft_push_prep(t_stack **stack, t_stack *top_node, char stack_name)
+void	ft_push_prep(t_stack **stack, t_stack *top_node, char s_name)
 {
 	while (*stack != top_node)
 	{
-		if (stack_name == 'a')
+		if (s_name == 'a')
 		{
 			if (top_node->above_median)
 				ra(stack);
 			else
 				rra(stack);
 		}
-		else if (stack_name == 'b')
+		else if (s_name == 'b')
 		{
 			if (top_node->above_median)
 				rb(stack);
@@ -55,31 +55,31 @@ long long	ft_check_errors(t_stack *stack, char *arg)
 	if (arg[i] == '-' || arg[i] == '+')
 		i++;
 	if (!arg[i])
-		return (2147483648);
+		return (LLONG_MAX);
 	while (arg[i])
 	{
 		if (!ft_isdigit(arg[i]))
-			return (2147483648);
+			return (LLONG_MAX);
 		i++;
 	}
 	value = ft_atoll(arg);
 	if (value > INT_MAX || value < INT_MIN)
-		return (2147483648);
+		return (LLONG_MAX);
 	if (ft_check_duplicate(stack, value))
-		return (2147483648);
+		return (LLONG_MAX);
 	return (value);
 }
 
-void	ft_put_nbr_in_new_node(t_stack **stack, int n)
+bool	ft_put_nbr_in_new_node(t_stack **stack, int n)
 {
 	t_stack	*newnode;
 	t_stack	*lastnode;
 
 	if (!stack)
-		return ;
+		return (false);
 	newnode = malloc(sizeof(t_stack));
 	if (!newnode)
-		return ;
+		return (false);
 	newnode->next = NULL;
 	newnode->prev = NULL;
 	newnode->nbr = n;
@@ -95,10 +95,10 @@ void	ft_put_nbr_in_new_node(t_stack **stack, int n)
 		lastnode->next = newnode;
 		newnode->prev = lastnode;
 	}
-	return ;
+	return (true);
 }
 
-int	ft_firstinit(t_stack **stack, char **argv)
+bool	ft_firstinit(t_stack **stack, char **argv)
 {
 	int			i;
 	long long	value;
@@ -107,11 +107,14 @@ int	ft_firstinit(t_stack **stack, char **argv)
 	while (argv[i])
 	{
 		value = ft_check_errors(*stack, argv[i]);
-		if (value == 2147483648)
-			return (0);
-		ft_put_nbr_in_new_node(stack, value);
+		if (value == LLONG_MAX)
+		{
+			write(1, "Error\n", 6);
+			return (false);
+		}
+		if (!ft_put_nbr_in_new_node(stack, value))
+			return (false);
 		i++;
 	}
-	return (1);
+	return (true);
 }
-

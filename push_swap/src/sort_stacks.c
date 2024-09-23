@@ -6,13 +6,13 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 19:53:18 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 03:54:25 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:18:16 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+void	r_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
 	while (*b != cheapest_node->target_node && *a != cheapest_node)
 		rr(a, b);
@@ -20,7 +20,7 @@ void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 	current_index(*b);
 }
 
-void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
+void	rr_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
 	while (*b != cheapest_node->target_node && *a != cheapest_node)
 		rrr(a, b);
@@ -34,10 +34,10 @@ void	move_a_to_b(t_stack **a, t_stack **b)
 
 	cheapest_node = ft_get_cheapest(*a);
 	if (cheapest_node->above_median && cheapest_node->target_node->above_median)
-		rotate_both(a, b, cheapest_node);
+		r_both(a, b, cheapest_node);
 	else if (!(cheapest_node->above_median)
 		&& !(cheapest_node->target_node->above_median))
-		rev_rotate_both(a, b, cheapest_node);
+		rr_both(a, b, cheapest_node);
 	ft_push_prep(a, cheapest_node, 'a');
 	ft_push_prep(b, cheapest_node->target_node, 'b');
 	pb(b, a);

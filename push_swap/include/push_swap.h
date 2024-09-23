@@ -6,12 +6,12 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:45 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 03:11:11 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:18:16 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSHSWAP_H
-# define PUSHSWAP_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <limits.h>
 /*int_max int_min*/
@@ -50,9 +50,9 @@ void			set_target_b(t_stack *a, t_stack *b);
 // stack_init.c
 bool			ft_check_duplicate(t_stack *stack, int value);
 long long		ft_check_errors(t_stack *stack, char *arg);
-void			ft_put_nbr_in_new_node(t_stack **stack, int n);
-int				ft_firstinit(t_stack **stack, char **argv);
-void			ft_push_prep(t_stack **stack, t_stack *top_node, char stack_name);
+bool			ft_put_nbr_in_new_node(t_stack **stack, int n);
+bool			ft_firstinit(t_stack **stack, char **argv);
+void			ft_push_prep(t_stack **stack, t_stack *top_node, char s_name);
 
 // stack_utils.c
 bool			ft_stack_sorted(t_stack *stack);
@@ -78,8 +78,8 @@ void			ss(t_stack **a, t_stack **b);
 void			ft_sort_stacks(t_stack **a, t_stack **b);
 void			min_on_top(t_stack **a);
 void			move_a_to_b(t_stack **a, t_stack **b);
-void			rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
-void			rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+void			rr_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
+void			r_both(t_stack **a, t_stack **b, t_stack *cheapest_node);
 
 // sort.c
 t_stack			*ft_get_cheapest(t_stack *stack);
@@ -88,7 +88,6 @@ void			ft_sort(t_stack **a, t_stack **b);
 
 // stop.c
 void			ft_free_stack(t_stack **stack);
-void			ft_free_stack_exit(t_stack **stack);
 void			ft_free_split(char **split_argv);
 
 #endif

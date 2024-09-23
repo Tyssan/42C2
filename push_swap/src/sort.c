@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 00:13:49 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 03:11:18 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:14:08 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_stack	*ft_get_cheapest(t_stack *stack)
 
 void	ft_sort_three(t_stack **a)
 {
-	t_stack *biggest_node;
+	t_stack	*biggest_node;
 
 	biggest_node = ft_biggest_node(*a);
 	if (biggest_node == *a)

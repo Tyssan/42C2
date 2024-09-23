@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:39:15 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 02:07:29 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:27:43 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ void	ft_free_stack(t_stack **stack)
 	}
 	*stack = NULL;
 	return ;
-}
-
-void	ft_free_stack_exit(t_stack **stack)
-{
-	ft_free_stack(stack);
-	write(1, "Error\n", 6);
-	exit (1);
 }
 
 void	ft_free_split(char **split_argv)
