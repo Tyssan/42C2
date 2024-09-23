@@ -1,52 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stop.c                                             :+:      :+:    :+:   */
+/*   ope_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/12 13:39:15 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 02:07:29 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/09/19 15:13:43 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/09/23 03:12:38 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ft_free_stack(t_stack **stack)
+static void	swap(t_stack **head)
 {
-	t_stack	*temp;
-	t_stack	*current;
-
-	if (!stack)
+	if (!*head || !(*head)->next)
 		return ;
-	current = *stack;
-	while (current)
-	{
-		temp = current->next;
-		free(current);
-		current = temp;
-	}
-	*stack = NULL;
-	return ;
+	*head = (*head)->next;
+	(*head)->prev->prev = *head;
+	(*head)->prev->next = (*head)->next;
+	if ((*head)->next)
+		(*head)->next->prev = (*head)->prev;
+	(*head)->next = (*head)->prev;
+	(*head)->prev = NULL;
 }
 
-void	ft_free_stack_exit(t_stack **stack)
+void	sa(t_stack **a)
 {
-	ft_free_stack(stack);
-	write(1, "Error\n", 6);
-	exit (1);
+	swap(a);
+	write(1, "sa\n", 3);
 }
 
-void	ft_free_split(char **split_argv)
+void	sb(t_stack **b)
 {
-	unsigned int	i;
+	swap(b);
+	write(1, "sb\n", 3);
+}
 
-	i = 0;
-	while (split_argv[i])
-	{
-		free(split_argv[i]);
-		i++;
-	}
-	free(split_argv);
-	return ;
+void	ss(t_stack **a, t_stack **b)
+{
+	swap(a);
+	swap(b);
+	write(1, "ss\n", 3);
 }

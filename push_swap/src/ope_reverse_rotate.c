@@ -1,52 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stop.c                                             :+:      :+:    :+:   */
+/*   ope_reverse_rotate.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/12 13:39:15 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 02:07:29 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/09/19 15:13:49 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/09/23 03:13:20 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ft_free_stack(t_stack **stack)
+static void	rev_rotate(t_stack **stack)
 {
-	t_stack	*temp;
-	t_stack	*current;
+	t_stack	*last;
 
-	if (!stack)
+	if (!*stack || !(*stack)->next)
 		return ;
-	current = *stack;
-	while (current)
-	{
-		temp = current->next;
-		free(current);
-		current = temp;
-	}
-	*stack = NULL;
-	return ;
+	last = ft_find_last_node(*stack);
+	last->prev->next = NULL;
+	last->next = *stack;
+	last->prev = NULL;
+	*stack = last;
+	last->next->prev = last;
 }
 
-void	ft_free_stack_exit(t_stack **stack)
+void	rra(t_stack **a)
 {
-	ft_free_stack(stack);
-	write(1, "Error\n", 6);
-	exit (1);
+	rev_rotate(a);
+	write(1, "rra\n", 4);
 }
 
-void	ft_free_split(char **split_argv)
+void	rrb(t_stack **b)
 {
-	unsigned int	i;
+	rev_rotate(b);
+	write(1, "rrb\n", 4);
+}
 
-	i = 0;
-	while (split_argv[i])
-	{
-		free(split_argv[i]);
-		i++;
-	}
-	free(split_argv);
-	return ;
+void	rrr(t_stack **a, t_stack **b)
+{
+	rev_rotate(a);
+	rev_rotate(b);
+	write(1, "rrr\n", 4);
 }

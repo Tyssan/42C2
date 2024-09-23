@@ -1,12 +1,12 @@
-c# **************************************************************************** #
-#`                                                                              #
+# **************************************************************************** #
+#                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbrunier <tbrunier@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 16:28:13 by tbrunier          #+#    #+#              #
-#    Updated: 2024/09/12 13:40:29 by tbrunier         ###   ########.fr        #
+#    Updated: 2024/09/23 02:24:05 by tbrunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ LIBFT_LIB	= $(LIBFT_PATH)/libft.a
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	actions.c init.c main.c sort.c stop.c
+SRC_FILES	=	init_a_to_b.c init_b_to_a.c main.c \
+				ope_push.c ope_reverse_rotate.c ope_rotate.c ope_swap.c \
+				sort_stacks.c sort.c stack_init.c stack_utils.c stop.c
 SRCS		=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))
 

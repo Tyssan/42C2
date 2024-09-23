@@ -1,52 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stop.c                                             :+:      :+:    :+:   */
+/*   ope_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/12 13:39:15 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/23 02:07:29 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/09/19 15:13:15 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/09/23 03:13:38 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ft_free_stack(t_stack **stack)
+static void	push(t_stack **dst, t_stack **src)
 {
-	t_stack	*temp;
-	t_stack	*current;
+	t_stack	*push_node;
 
-	if (!stack)
+	if (!*src)
 		return ;
-	current = *stack;
-	while (current)
+	push_node = *src;
+	*src = (*src)->next;
+	if (*src)
+		(*src)->prev = NULL;
+	push_node->prev = NULL;
+	if (!*dst)
 	{
-		temp = current->next;
-		free(current);
-		current = temp;
+		*dst = push_node;
+		push_node->next = NULL;
 	}
-	*stack = NULL;
-	return ;
+	else
+	{
+		push_node->next = *dst;
+		push_node->next->prev = push_node;
+		*dst = push_node;
+	}
 }
 
-void	ft_free_stack_exit(t_stack **stack)
+void	pa(t_stack **a, t_stack **b)
 {
-	ft_free_stack(stack);
-	write(1, "Error\n", 6);
-	exit (1);
+	push(a, b);
+	write(1, "pa\n", 3);
 }
 
-void	ft_free_split(char **split_argv)
+void	pb(t_stack **b, t_stack **a)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (split_argv[i])
-	{
-		free(split_argv[i]);
-		i++;
-	}
-	free(split_argv);
-	return ;
+	push(b, a);
+	write(1, "pb\n", 3);
 }
