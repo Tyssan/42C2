@@ -1,10 +1,10 @@
 # 42C2
 Cursus 42 Circle 2
 -
-minitalk: 123/100 MANDATORY:OK BONUS:OK
+minitalk: 125/100 MANDATORY:OK BONUS:OK
 
 pipex: 100/100 MANDATORY: OK BONUS: NULL
 
 fractol: 125/100 MANDATORY: OK BONUS: OK
 
-push_swap: WIP
+push_swap: 100/100 MANDATORY (100 inputs 5/5, 500 inputs 4/5): OK BONUS: NULL
