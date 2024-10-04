@@ -1,6 +1,4 @@
 #include "ft_list.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 int	ft_list_size(t_list *begin_list)
 {
@@ -14,6 +12,10 @@ int	ft_list_size(t_list *begin_list)
 	}
 	return (i);
 }
+
+/*
+#include <stdlib.h>
+#include <stdio.h>
 
 t_list *create_node(void *data)
 {
@@ -35,4 +37,4 @@ int	main(void)
 	node4->next = NULL;
 	int len = ft_list_size(node1);
 	printf("%d\n", len);
-}
+}*/
