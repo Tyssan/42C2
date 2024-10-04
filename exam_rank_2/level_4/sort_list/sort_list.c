@@ -6,39 +6,37 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 22:13:11 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/09/21 02:48:29 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/10/04 03:45:27 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include <unistd.h>
 
 t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	int		temp_a;
-	int		temp_b;
-	int		boule;
-	t_list	*res;
+	t_list	*current;
+	int		sorted;
+	int		temp;
 
-	res = lst;
-	while (lst->next != NULL)
+	sorted = 0;
+	while (!sorted)
 	{
-		temp_a = lst->data;
-		temp_b = lst->next->data;
-		boule = cmp(temp_a, temp_b);
-		if (boule == 0)
+		current = lst;
+		sorted = 1;
+		while (current->next)
 		{
-			lst->data = temp_b;
-			lst = lst->next;
-			lst->data = temp_a;
-			lst = res;
-		}
-		else
-		{
-			lst = lst->next;
+			if (!cmp(current->data, current->next->data))
+			{
+				temp = current->data;
+				current->data = current->next->data;
+				current->next->data = temp;
+				current = current->next;
+				sorted = 0;
+			}
+			else
+				current = current->next;
 		}
 	}
-	lst = res;
 	return (lst);
 }
 
@@ -75,4 +73,12 @@ int ascending(int a, int b)
 {
 	return (a <= b);
 }
+.h =
+typedef struct s_list t_list;
+
+struct s_list
+{
+	int     data;
+	t_list  *next;
+};
 */
