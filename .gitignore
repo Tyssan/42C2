@@ -3,6 +3,7 @@
 /fractol/src/obj/
 /fractol/src/libft/obj/
 /fractol/src/libft/libft.a
+
 /push_swap/.ignore/
 /push_swap/checker_linux
 /push_swap/obj/
@@ -14,3 +15,7 @@
 /push_swap/pro_checker
 /push_swap/.ignore
 /push_swap/push_swap_tester
+
+/fdf/fdf_linux
+/fdf/test_maps
+/fdf/minilibx-linux
