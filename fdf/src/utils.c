@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 17:06:46 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/11 17:22:00 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/10/11 20:16:07 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/10/12 01:11:17 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "../include/fdf.h"
 
-#include "../get_next_line/include/get_next_line.h"
 
-int		ft_atoi(const char *nptr);
-void	ft_putstr_fd(char *s, int fd);
-char	**ft_split(char const *s, char c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
-#endif
+void	ft_free_split_lines(char **lines)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (lines[i])
+	{
+		free(lines[i]);
+		i++;
+	}
+}

@@ -6,7 +6,7 @@
 #    By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 15:59:52 by tbrunier          #+#    #+#              #
-#    Updated: 2024/10/09 23:09:45 by tbrunier         ###   ########.fr        #
+#    Updated: 2024/10/11 20:18:15 by tbrunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBFT_LIB	= $(LIBFT_PATH)/libft.a
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	main.c
+SRC_FILES	=	init.c main.c utils.c
 LIBSX		=	$(addprefix $(LIBX_PATH),$(LIBX_NAME))
 SRCS		=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))
