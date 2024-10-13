@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 17:59:29 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/12 01:10:07 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:12:41 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ bool	ft_map_size_parsing(int fd, t_fdf *fdf_data)
 	char			*line;
 
 	line_size = 0;
-	fdf_data->map_h = 0;
+	fdf_data->flt_x = 0;//initialisation a 0 par défaut avant utilisation
+	fdf_data->flt_y = 0;
+	fdf_data->map_x = 0;
 	while ((line = get_next_line(fd)) != NULL)//tant qu'il y a une ligne, change de ligne a chaque itération
 	{
 		split_lines = ft_split(line, ' ');//splite chaque valeur pour compter combien il y en a apres
@@ -27,11 +29,11 @@ bool	ft_map_size_parsing(int fd, t_fdf *fdf_data)
 			return (0);
 		while (split_lines[line_size])//compte combien de valeurs
 			line_size++;
-		if (fdf_data->map_w == 0)//si premiere iteration, map_w forcement a 0
-			fdf_data->map_w = line_size;//donnes le nb de valeur sur une ligne
-		else if (fdf_data->map_w != line_size)//si c'est pas la premiere iteration, alors la longueur de la ligne a deja ete comptée
+		if (fdf_data->map_y == 0)//si premiere iteration, map_y forcement a 0
+			fdf_data->map_y = line_size;//donnes le nb de valeur sur une ligne
+		else if (fdf_data->map_y != line_size)//si c'est pas la premiere iteration, alors la longueur de la ligne a deja ete comptée
 			return (0);//retourne 0 si la ligne actuelle est differente de la premiere (toutes les lignes doivent etre les memes)
-		fdf_data->map_h++;//augmente la taille en hauteur a chaque iteration
+		fdf_data->map_x++;//augmente la taille en hauteur a chaque iteration
 		ft_free_split_lines(split_lines);
 		free(line);//split utilise malloc sur line, faut free avant la fin.
 	}
@@ -45,13 +47,13 @@ bool	ft_matrix_init(int fd, t_fdf *fdf_data)
 	char	**split_lines;
 	char	*line;
 
-	fdf_data->matrix = (int **)malloc(sizeof(int *) * fdf_data->map_h);//malloc le nombre de lignes
+	fdf_data->matrix = (int **)malloc(sizeof(int *) * fdf_data->map_x);//malloc le nombre de lignes
 	if (!fdf_data->matrix)//malloc check
 		return (0);
 	i_pos = 0;//position 0 par defaut
 	while ((line = get_next_line(fd)) != NULL)//parcours les lignes du fd
 	{
-		fdf_data->matrix[i_pos] = (int *)malloc(sizeof(int) * fdf_data->map_w);//malloc a chaque iteration le nombre de valeurs sur la ligne actuelle
+		fdf_data->matrix[i_pos] = (int *)malloc(sizeof(int) * fdf_data->map_y);//malloc a chaque iteration le nombre de valeurs sur la ligne actuelle
 		if (!fdf_data->matrix[i_pos])//malloc check
 			return (0);
 		split_lines = ft_split(line, ' ');//split les valerus de la ligne dans un tableau a part

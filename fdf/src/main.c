@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:05:34 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/11 23:54:33 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:21:57 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)//le main du projet
 		return (write(2, "ERROR: too much/few arguments given.\n", 37), 1);//verifie si il y a bien un seul input (map)
 	if (!ft_init_main(argv[1], &data))//fonction d'initialisation du programme
 		return (1);// renvoie 1 (erreur de programme) pour arreter entierement le programme si l'initialisation échoue
-	draw_fdf(&data);//algo fdf
+	//draw_fdf(&data);//algo fdf
 	mlx_key_hook(data.mlx_win_ptr, keys_hook, &data);//gestion de la touche échap pour fermer le programme
 	mlx_hook(data.mlx_win_ptr, 17, 0, terminate_program, &data);//hook qui terminate_program(&data) si l'event 17 (fermeture avec la croix de la window) est détecté
 	mlx_loop(data.mlx_ptr);//laisse la fenetre affichée

@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:06:38 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/11 23:38:43 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:21:34 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 /*write*/
 # include <stdlib.h>
 /*malloc, free, exit*/
+# include <fcntl.h>
+/*O_RDONLY keyword definition*/
 # include <math.h>
 /*maths functions (fabs, ..)*/
 # include <X11/keysym.h>
@@ -44,8 +46,10 @@ typedef struct s_image
 typedef struct s_fdf
 {
 	int				**matrix;
-	unsigned int	map_h;
-	unsigned int	map_w;
+	unsigned int	map_x;
+	unsigned int	map_y;
+	float			flt_x;
+	float			flt_y;
 }	t_fdf;
 
 typedef struct s_data
