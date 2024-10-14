@@ -6,7 +6,7 @@
 #    By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 13:10:24 by tbrunier          #+#    #+#              #
-#    Updated: 2024/10/11 17:23:29 by tbrunier         ###   ########.fr        #
+#    Updated: 2024/10/13 21:47:42 by tbrunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,11 @@ INC_PATH	= include/
 SRC_PATH	= .
 OBJ_PATH	= obj/
 
-GNL_PATH	= get_next_line/
-GNL_A		= $(GNL_PATH)/get_next_line.a
-
 ################################################################################
 ## SOURCES
 
-SRC_FILES	= ft_atoi.c ft_putstr_fd.c ft_split.c ft_strncmp.c
+SRC_FILES	= ft_atoi.c ft_putstr_fd.c ft_split.c ft_strlen.c ft_strncmp.c \
+				get_next_line_utils.c get_next_line.c
 
 SRCS		= $(addprefix $(SRC_PATH)/, $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_PATH)/, $(SRC_FILES:.c=.o))
@@ -36,7 +34,7 @@ OBJS		= $(addprefix $(OBJ_PATH)/, $(SRC_FILES:.c=.o))
 ################################################################################
 ## RULES
 
-all: gnl $(NAME)
+all: $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT_LIB)
 	ar rcs $(NAME) $(OBJS)
@@ -46,17 +44,12 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
 $(OBJ_PATH) :
 	mkdir -p $(OBJ_PATH)
 
-gnl:
-		$(MAKE) -C $(GNL_PATH)
-
 clean:
 	rm -rf $(OBJ_PATH)
-	$(MAKE) -C $(GNL_PATH) clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(GNL_PATH) fclean
 
 re: fclean all
 
-.PHONY: all gnl clean fclean re
+.PHONY: all clean fclean re

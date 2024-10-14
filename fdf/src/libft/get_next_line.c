@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/get_next_line.h"
+#include "./include/libft.h"
 
 char	*get_next_line(int fd)
 {
@@ -132,7 +132,7 @@ void	clean_stash(t_list **stash)
 		i++;
 	if (last->content != NULL && last->content[i] == '\n')
 		i++;
-	clean->content = malloc(sizeof(char) * ((ftstrlen(last->content) - i) + 1));
+	clean->content = malloc(sizeof(char) * ((ft_strlen(last->content) - i) + 1));
 	if (clean->content == NULL)
 		return ;
 	j = 0;

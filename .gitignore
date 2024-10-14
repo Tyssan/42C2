@@ -1,9 +1,11 @@
+/fractol/.vscode
 /fractol/.ignore/
 /fractol/minilibx-linux/
 /fractol/src/obj/
 /fractol/src/libft/obj/
 /fractol/src/libft/libft.a
 
+/push_swap/.vscode
 /push_swap/.ignore/
 /push_swap/checker_linux
 /push_swap/obj/
@@ -16,6 +18,7 @@
 /push_swap/.ignore
 /push_swap/push_swap_tester
 
+/fdf/.vscode
 /fdf/fdf_linux
 /fdf/test_maps
 /fdf/minilibx-linux

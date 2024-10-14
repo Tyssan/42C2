@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/get_next_line.h"
+#include "./include/libft.h"
 
 int	found_new_line(t_list *stash)
 {
@@ -77,14 +77,4 @@ void	free_stash(t_list *stash)
 		free(current);
 		current = buffer;
 	}
-}
-
-size_t	ftstrlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
 }

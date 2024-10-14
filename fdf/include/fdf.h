@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:06:38 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/13 21:21:34 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/10/14 06:18:42 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,28 @@ typedef struct s_data
 	void			*mlx_ptr;
 	void			*mlx_win_ptr;
 	t_image			*img;
-	t_fdf			*fdf
+	t_fdf			*fdf;
 }	t_data;
 
 /*init.c*/
-bool		ft_map_size_parsing(int fd, t_fdf *fdf_data);
-bool		ft_matrix_init(int fd, t_fdf *fdf_data);
-bool		ft_map_parsing(char *file, t_data *data);
+t_fdf		*ft_fdfstruct_maker(void);
+t_image		*ft_imagestruct_maker(void);
+void		ft_mlx_destroyer(t_data *data, int code);
 bool		ft_mlx_init(t_data *data);
 bool		ft_init_main(char *file, t_data *data);
 
 /*main.c*/
+int			terminate_program(t_data *data);
 int			keys_hook(int key, t_data *data);
 
-/*utils.c*/
+/*parsing_utils.c*/
+void		ft_free_partial_matrix(int **matrix, unsigned int rows_allocated, char *line);
+void		ft_free_matrix(int **matrix, unsigned int map_y);
 void		ft_free_split_lines(char **lines);
+
+/*struct_init.c*/
+bool		ft_map_size_parsing(int fd, t_fdf *fdf_data);
+bool		ft_matrix_init(int fd, t_fdf *fdf_data);
+bool		ft_map_parsing(char *file, t_data *data);
 
 #endif
