@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:06:46 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/14 03:28:19 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/10/15 20:09:36 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@
 //LIBFT
 # include <stddef.h>
 //size_t variable
+//GNL
+# include <stdlib.h>
+# include <unistd.h>
 
 int		ft_atoi(const char *nptr);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
-//GNL
-# include <stdlib.h>
-# include <unistd.h>
 
 # define BUFFER_SIZE 1
 
@@ -36,7 +35,7 @@ typedef struct s_list
 }				t_list;
 
 /*get_next_line.c*/
-char	*get_next_line(int fd);
+int		get_next_line(int fd, char **line);
 void	read_and_stash(int fd, t_list **stash);
 void	add_to_stash(t_list **stash, char *buf, ssize_t readed);
 void	extract_line(t_list *stash, char **line);

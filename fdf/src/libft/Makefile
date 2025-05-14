@@ -6,7 +6,7 @@
 #    By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 13:10:24 by tbrunier          #+#    #+#              #
-#    Updated: 2024/10/13 21:47:42 by tbrunier         ###   ########.fr        #
+#    Updated: 2024/10/15 11:49:17 by tbrunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 NAME		= libft.a
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 INC_PATH	= include/
 SRC_PATH	= .

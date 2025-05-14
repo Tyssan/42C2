@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./include/libft.h"
 
 unsigned int	count_words(char const *str, char c)
 {
@@ -19,9 +19,10 @@ unsigned int	count_words(char const *str, char c)
 
 	i = 0;
 	j = 0;
-	while (str[i])
+	while (str[i] != '\n' && str[i] != '\0')
 	{
-		if (str[i] != c && (str[i + 1] == c || str[i + 1] == '\0'))
+		if (str[i] != c && (str[i + 1] == c
+				|| str[i + 1] == '\0' || str[i + 1] == '\n'))
 			j++;
 		i++;
 	}
@@ -65,15 +66,22 @@ char	**ft_split(char const *s, char c)
 	tab = malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (!tab)
 		return (NULL);
-	while (*s != '\0')
+	while (*s != '\0' && *s != '\n')
 	{
-		while (*s != '\0' && *s == c)
+		while ((*s != '\0' && *s != '\n') && *s == c)
 			s++;
-		if (*s != '\0')
+		if (*s != '\0' && *s != '\n')
+		{
 			tab[i++] = get_word(s, c);
-		while (*s != '\0' && *s != c)
+			if (!tab[i - 1])
+			{
+				while (i > 0)
+					free(tab[--i]);
+				return (free(tab), NULL);
+			}
+		}
+		while ((*s != '\0' && *s != '\n') && *s != c)
 			s++;
 	}
-	tab[i] = 0;
-	return (tab);
+	return (tab[i] = 0, tab);
 }

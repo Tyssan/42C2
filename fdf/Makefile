@@ -6,21 +6,21 @@
 #    By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 15:59:52 by tbrunier          #+#    #+#              #
-#    Updated: 2024/10/14 02:46:04 by tbrunier         ###   ########.fr        #
+#    Updated: 2024/10/15 15:32:32 by tbrunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ################################################################################
 ## VARIABLES
 
-NAME = fdf
+NAME		= fdf
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g -O0#valgrind_debug_flags
 
 LIBX_PATH	= ./minilibx-linux/
 LIBX_NAME	= libmlx.a
-MLX_SETTING	= -l mlx -l Xext -l X11
+MLX_SETTING	= -lmlx -lXext -lX11 -lm
 
 LIBFT_PATH	= src/libft
 LIBFT_LIB	= $(LIBFT_PATH)/libft.a
@@ -32,7 +32,7 @@ OBJ_PATH	= obj/
 ################################################################################
 ## SOURCES
 
-SRC_FILES	=	init.c main.c parsing_utils.c struct_init.c
+SRC_FILES	=	draw_utils.c draw.c init.c main.c parsing_utils.c struct_init.c
 LIBSX		=	$(addprefix $(LIBX_PATH),$(LIBX_NAME))
 SRCS		=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJS		=	$(addprefix $(OBJ_PATH),$(SRC_FILES:.c=.o))

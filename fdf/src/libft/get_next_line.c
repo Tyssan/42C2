@@ -12,27 +12,28 @@
 
 #include "./include/libft.h"
 
-char	*get_next_line(int fd)
+int	get_next_line(int fd, char **line)
 {
 	static t_list	*stash = NULL;
-	char			*line;
+	char			*newline;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, &line, 0) < 0)
-		return (NULL);
-	line = NULL;
+		return (0);
+	newline = NULL;
 	read_and_stash(fd, &stash);
 	if (stash == NULL)
-		return (NULL);
-	extract_line(stash, &line);
+		return (0);
+	extract_line(stash, &newline);
 	clean_stash(&stash);
-	if (line[0] == '\0')
+	if (newline[0] == '\0')
 	{
 		free_stash(stash);
 		stash = NULL;
-		free(line);
-		return (NULL);
+		free(newline);
+		return (0);
 	}
-	return (line);
+	*line = newline;
+	return (1);
 }
 
 void	read_and_stash(int fd, t_list **stash)
@@ -132,7 +133,8 @@ void	clean_stash(t_list **stash)
 		i++;
 	if (last->content != NULL && last->content[i] == '\n')
 		i++;
-	clean->content = malloc(sizeof(char) * ((ft_strlen(last->content) - i) + 1));
+	clean->content = malloc(sizeof(char)
+			* ((ft_strlen(last->content) - i) + 1));
 	if (clean->content == NULL)
 		return ;
 	j = 0;
