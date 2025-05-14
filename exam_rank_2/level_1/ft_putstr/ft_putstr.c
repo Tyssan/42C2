@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 16:04:58 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/16 21:27:14 by tbrunier         ###   ########.fr       */
+/*   Created: 2025/03/10 10:48:22 by tbrunier          #+#    #+#             */
+/*   Updated: 2025/03/10 10:58:40 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(char *s1, char *s2)
+#include <unistd.h>
+
+void	ft_putstr(char *str)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
+	while (str[i])
+	{
+		write(1, &str[i], 1);
 		i++;
-	return (s1[i] - s2[i]);
+	}
 }
-
-/*
-#include <string.h>
-#include <stdio.h>
-int	main(int ac, char **av)
-{
-	(void)ac;
-	printf("res1=%d\nres2=%d\n", strcmp(av[1], av[2]), ft_strcmp(av[1], av[2]));
-	return (0);
-}*/

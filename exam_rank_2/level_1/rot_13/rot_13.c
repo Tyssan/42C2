@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   rot_13.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 16:04:58 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/16 21:27:14 by tbrunier         ###   ########.fr       */
+/*   Created: 2025/03/10 11:27:58 by tbrunier          #+#    #+#             */
+/*   Updated: 2025/03/10 11:39:10 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(char *s1, char *s2)
+#include <unistd.h>
+
+void	ft_rot_13(char *str)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
+	while (str[i])
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+		{
+			if ((str[i] >= 'a' && str[i] <= 'm') || (str[i] >= 'A' && str[i] <= 'M'))
+				str[i] = (str[i] + 13);
+			else
+				str[i] = (str[i] - 13);
+		}
+		write(1, &str[i], 1);
 		i++;
-	return (s1[i] - s2[i]);
+	}
 }
 
-/*
-#include <string.h>
-#include <stdio.h>
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
-	(void)ac;
-	printf("res1=%d\nres2=%d\n", strcmp(av[1], av[2]), ft_strcmp(av[1], av[2]));
+	if (argc == 2)
+		ft_rot_13(argv[1]);
+	write(1, "\n", 1);
 	return (0);
-}*/
+}

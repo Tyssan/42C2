@@ -1,31 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcspn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 16:04:58 by tbrunier          #+#    #+#             */
-/*   Updated: 2024/10/16 21:27:14 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/10/18 09:58:28 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/10/18 11:24:45 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	unsigned int	i;
+#include <stddef.h>
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+size_t	ft_strcspn(const char *s, const char *reject)
+{
+	size_t	res;
+	size_t	i;
+
+	res = 0;
+	i = -1;
+	while (s[res])
+	{
+		while(reject[++i])
+		{
+			if (s[res] == reject[i])
+				return (res);
+		}
+		i = -1;
+		res++;
+	}
+	return (res);
 }
 
-/*
+/*#include <stdio.h>
 #include <string.h>
-#include <stdio.h>
-int	main(int ac, char **av)
+
+int	main(void)
 {
-	(void)ac;
-	printf("res1=%d\nres2=%d\n", strcmp(av[1], av[2]), ft_strcmp(av[1], av[2]));
+	const char	s[] = "oui bonjour";
+	const char	reject[] = "z";
+
+	printf("%ld\n", ft_strcspn(s, reject));
+	printf("%ld\n", strcspn(s, reject));
 	return (0);
 }*/
